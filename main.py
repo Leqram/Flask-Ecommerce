@@ -21,8 +21,8 @@ import datetime
 
 
 
-SERVER_KEY = 'SB-Mid-server-6esF5nrYh4dHdBcCEaQRB1V4'
-CLIENT_KEY = 'SB-Mid-client-4gQWc5UKitTkbJvB' 
+SERVER_KEY = 'Your Server Key'
+CLIENT_KEY = 'Your Client Key' 
 
 core = CoreApi(
     is_production=False,
@@ -31,10 +31,10 @@ core = CoreApi(
 )
 
 
-app.config['UPLOAD_FOLDER'] = 'D:/Project/Project P/Belajar/Bidyshop/static/assets/images/'
+app.config['UPLOAD_FOLDER'] = 'your Directory'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-app.secret_key = "susu ultramilk"
+app.secret_key = "Secret Key"
 
 
 
@@ -161,56 +161,6 @@ def product_details():
         return redirect(url_for('cart'))
 
     return render_template('detail_product.html')
-
-
-
-# @app.route('/cart', methods = ['POST', 'GET'])
-# def cart():
-#     _quantity = request.args.get('quantity')
-#     if 'cart' in request.args:
-#         _id = request.args['cart']
-#         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-#         cur.execute("SELECT * FROM barang WHERE id_barang = %s", (_id,))
-#         rows = cur.fetchone()
-
-#         itemArray = {'id_barang' : rows[0],'nama_produk' : rows[1], 'quantity' : [_quantity], 'price' : rows[2], 'subtotal' : _quantity * rows[2]}
-#         all_total_price = 0
-#         all_total_quantity = 0
-
-#         session.modified = True
-#         if 'cart item' in session:
-#             if rows['id_barang'] in session['cart_item']:
-#                 for key, value in session['cart_item'].items():
-#                     if rows['id_barang'] == key:
-#                         old_quantity = session['cart_item'][key]['quantity']
-#                         total_quantity = old_quantity + _quantity
-#                         session['cart_item'][key]['quantity'] = total_quantity
-#                         session['cart_item'][key]['total_price'] = total_quantity * rows[2]
-            
-#             else:
-#                 session['cart_item'] = array_merge(session['cart_item'], itemArray)
-
-#             for key, value in session['cart_item'].items():
-#                 individual_quantity = int(session['cart_item'][key]['quantity'])
-#                 individual_price = float(session['cart_item'][key]['total_price'])
-#                 all_total_quantity = all_total_quantity + individual_quantity
-#                 all_total_price = all_total_price + individual_price
-        
-#         else:
-#             session['cart_item'] = itemArray
-#             all_total_quantity = all_total_quantity + _quantity
-#             all_total_price = all_total_price + _quantity * rows[2]
-            
-#         session['all_total_quantity'] = all_total_quantity
-#         session['all_total_price'] = all_total_price
-
-
-#     return render_template('cart.html')
-
-
-# code pada function cart salah seharusnya
-# code tersebut berada di product details
-# cart hanya menerima data dan menampilkannya
 
 
 
