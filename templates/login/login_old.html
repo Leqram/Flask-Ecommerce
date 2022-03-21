@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Datang!</title>
+    <link rel="stylesheet" href="/static/css/stylesheet.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
+  </head>
+  <body>
+    <form action="" method="post">
+      <div class="container">
+        <p class="heading">Login</p>
+        <div class="box">
+          <p>Username</p>
+          <!-- input username -->
+          <div>
+            <input type="text" name="username" placeholder="Masukkan Username..." required />
+          </div>
+        </div>
+
+        <div class="box">
+          <p>Password</p>
+          <!-- input password -->
+          <div>
+            <input type="password" name="password" placeholder="Masukkan Password..." required />
+          </div>
+        </div>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+        <input class="loginBtn" type="submit" value="Login" />
+        <!-- submit -->
+        <p class="text">Tidak punya akun? <a href="register">Register Sekarang</a></p>
+        <!-- Jika User/Guest belum memiliki akun kilk untuk register (Redirect ke register.html) -->
+      </div>
+    </form>
+  </body>
+  <!--Copyright © 2021 3Bidy Project-->
+</html>

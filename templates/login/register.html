@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register</title>
+        <!-- link CSS dan Bootstrap -->
+    <link rel="stylesheet" href="/static/css/stylesheet.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" /> 
+    </head>
+    <body>
+        <form action="{{url_for('register')}}" method="POST" autocomplate="off" enctype="multipart/form-data" >
+            <div class="container">
+              <p class="heading">Register</p>
+              <div class="box">
+                <p>Username</p>
+                <!-- Input Username baru-->
+                <div>
+                    <input type="username" name="username" id="username" placeholder="Masukkan Username baru..." required/>
+                </div>
+              </div>
+
+              <div class="box">
+                <p>Password</p>
+                <!-- input password baru-->
+                <div>
+                  <input type="password" name="password" id="password" placeholder="Masukkan Password..." required/>
+                </div>
+              </div>
+              
+              <div class="box">
+                <p>Nama Lengkap</p>
+                <!-- Input Username baru-->
+                <div>
+                    <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap Anda..." required/>
+                </div>
+              </div>
+                          
+              <div class="box">
+                <p>E-mail</p>
+                <!-- input email user baru -->
+                <div>
+                  <input type="email" name="email" id="email" placeholder="Masukkan E-mail..." required/>
+                </div>
+              </div>
+              
+              <div class="box">
+                <p>No.Telepon</p>
+                <!-- input no hp user baru -->
+                <div>
+                  <input type="text" name="no_telepon" id="no_telepon" placeholder="Masukkan Nomor Telepon..." required/>
+                </div>
+              </div>
+
+              <div class="box">
+                <p>Foto Profile</p>
+                <!-- Input Username baru-->
+                <div>
+                    <input type="file" name="foto_profile" placeholder="Masukkan Alamat Rumah Lengkap..." required/>
+                </div>
+              </div>
+              <hr>
+
+              <div class="box">{{ error }}</div>
+              <input class="RegisBtn" type="submit" value="Register">Register Now</input>
+
+        </form>
+    </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Home</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/css/styless.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand">BidyShop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">All Products</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% if 'username' not in session %}
+                                <li><a class="dropdown-item" href="{{url_for('login')}}">Register/Login</a></li>
+                                {% endif %}
+                                {% if 'username' in session %}
+                                <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider" /></li>
+                                {% if 'username' in session %}
+                                <li><a class="dropdown-item" href="{{url_for('status_pengiriman')}}">Delivery Status</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" method = "POST">
+                        <input type = "text" name = "search" placeholder = "Pencarian" />
+                        <button type = "submit">search</button>
+                        <div class=""><a class="btn btn-outline-dark mt-auto" href="lol.html">
+                            <i class="bi-cart-fill me-1"></i>
+			                Cart</a>
+                        </div>
+                        {% if 'username' in session %}
+                        <div class=""><a class="btn btn-outline-dark mt-auto" href="{{url_for('account')}}">
+                            <i class="bi-person-fill me-1"></i>
+                            Profile
+                        </a>
+                        </div>
+                        {% endif %}
+                    </form> 
+            </div>
+        </nav>
+          <!-- Header-->
+          <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Welcome, {% if 'username' not in session %} Stranger {% endif %} {{session['username']}}</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">"We don't make Ecommerce, We make Ecommerce better."</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="text-center text-black">
+                <p class="lead fw-large text-black-70 mb-0">{% if not searching %} Hot Product Right Now {% endif %} {% if searching %} search result {% endif %}</p>
+             </div>
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    {% for produk in Tas %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/assets/images/{{produk.6}}/{{produk.7}}" alt="..." href="assets/favicon.ico"/>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">
+                                        {{produk[1]}}</h5>
+                                    <!-- Product price-->
+                                    Rp. {{produk[2]}},-
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product_details?view={{produk.0}}">Product details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} 
+
+                    {% for produk in Watch %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/assets/images/{{produk.6}}/{{produk.7}}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{produk[1]}}</h5>
+                                    <!-- Product price-->
+                                    Rp. {{produk[2]}},-
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product_details?view={{produk.0}}">Product details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for produk in Kemeja %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/assets/images/Kemeja/{{produk.7}}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{produk[1]}}</h5>
+                                    <!-- Product price-->
+                                    Rp. {{produk[2]}},-
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product_details?view={{produk.0}}">Product details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for produk in tshirt %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/assets/images/Tshirt/{{produk.7}}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{produk[1]}}</h5>
+                                    <!-- Product price-->
+                                    Rp. {{produk[2]}},-
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product_details?view={{produk.0}}">Product details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for produk in searching %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/assets/images/{{produk.6}}/{{produk.7}}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{produk[1]}}</h5>
+                                    <!-- Product price-->
+                                    Rp. {{produk[2]}},-
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product_details?view={{produk.0}}">Product details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; BidyShop 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="static/js/scriptss.js"></script>
+    </body>
+</html>
+

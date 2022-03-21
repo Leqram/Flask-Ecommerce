@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+   <link rel="stylesheet" href="/static/css/style.css" />
+  <title>BidyStore</title>
+</head>
+
+<body>
+
+  <!-- Navigation bar ngab -->
+  <nav class="nav">
+    <div class="wrapper container">
+      <div class="logo"><a href="/">BidyShop</a></div>
+      <ul class="nav-list">
+        <div class="top">
+          <label for="" class="btn close-btn"><i class="fas fa-times"></i></label>
+        </div>
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li>
+          <a href="" class="desktop-item">Shop <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showMega" />
+          <label for="showMega" class="mobile-item">Shop <span><i class="fas fa-chevron-down"></i></span></label>
+          <div class="mega-box">
+            <div class="content">
+              <div class="row">
+                <img src="{{url_for('static', filename = 'assets/images/woman.jpg')}}" alt="" />
+              </div>
+              <div class="row">
+                <header>Categories</header>
+                <ul class="mega-links">
+                  <li><a href="#">T-shirt</a></li>
+                  <li><a href="#">Kemeja</a></li>
+                  <li><a href="#">Peralatan Rumah Tangga</a></li>
+                  <li><a href="#">Hobbies</a></li>
+                </ul>
+              </div>
+              <div class="row">
+                <header>Filter Layout</header>
+                <ul class="mega-links">
+                  <li><a href="#">Sidebar</a></li>
+                  <li><a href="#">Filter Default</a></li>
+                  <li><a href="#">Filter Drawer</a></li>
+                  <li><a href="#">Filter Dropdown</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a href="" class="desktop-item">Page <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showdrop2" />
+          <label for="showdrop2" class="mobile-item">Page <span><i class="fas fa-chevron-down"></i></span></label>
+          <ul class="drop-menu2">
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </li>
+        <!-- icons -->
+        <li class="icons">
+          <span>
+            <img src="{{url_for('static', filename = 'assets/shoppingBag.svg')}}" alt="" />
+            <small class="count d-flex">0</small>
+          </span>
+          <span><img src="{{url_for('static', filename = 'assets/search.svg')}}" alt="" /></span>
+        </li>
+      </ul>
+      <label for="" class="btn open-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+
+    <!-- Cart Items -->
+    <div class="container cart">
+      {% for produk in produks %}
+      <table>
+        <tr>
+          <th>Nama Produk</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+        <tr>
+          <td>
+            <div class="cart-info">
+              <img src="static/assets/images/{{produk[6]}}/{{produk[7]}}" alt="" />
+              <div>
+                <p>{{produk[1]}}</p>
+                <span>Rp.{{produk[2]}}</span>
+                <br />
+                <a href="#">remove</a>
+              </div>
+            </div>
+          </td>
+          <td></td>
+          <td>Rp.{{produk[2]}}</td>
+        </tr>
+      </table>
+
+      <div class="total-price">
+        <table>
+          <tr>
+            <td>Subtotal</td>
+            <td>Rp.{{produk[2]}}</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td>Rp.{{produk[2]}}</td>
+          </tr>
+        </table>
+        <a href="/address?cid={{produk.0}}" class="checkout btn">Proceed To Checkout</a>
+        {% endfor %}
+      </div>
+    </div>
+
+     <!-- Footer -->
+   <footer id="footer" class="section footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-center">
+          <h3>EXTRAS</h3>
+          <a href="#">Brands</a>
+          <a href="#">Gift Certificates</a>
+          <a href="#">Affiliate</a>
+          <a href="#">Specials</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>INFORMATION</h3>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>MY ACCOUNT</h3>
+          <a href="#">My Account</a>
+          <a href="#">Order History</a>
+          <a href="#">Wish List</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+  </footer>
+  <!-- End Footer -->
+
+    <!-- Custom Scripts -->
+    <script src="./js/products.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="#" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <!-- Custom StyleSheet -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <title>BidyStore</title>
+</head>
+
+<body>
+ <!-- Navigation -->
+  <nav class="nav">
+    <div class="wrapper container">
+      <div class="logo"><a href="/">BidyShop</a></div>
+      <ul class="nav-list">
+        <div class="top">
+          <label for="" class="btn close-btn"><i class="fas fa-times"></i></label>
+        </div>
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li>
+          <a href="" class="desktop-item">Shop <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showMega" />
+          <label for="showMega" class="mobile-item">Shop <span><i class="fas fa-chevron-down"></i></span></label>
+          <div class="mega-box">
+            <div class="content">
+              <div class="row">
+                <img src="{{url_for('static', filename = 'assets/images/woman.jpg')}}" alt="" />
+              </div>
+              <div class="row">
+                <header>Categories</header>
+                <ul class="mega-links">
+                  <li><a href="#">T-shirt</a></li>
+                  <li><a href="#">Kemeja</a></li>
+                  <li><a href="#">Peralatan Rumah Tangga</a></li>
+                  <li><a href="#">Hobbies</a></li>
+                </ul>
+              </div>
+              <div class="row">
+                <header>Filter Layout</header>
+                <ul class="mega-links">
+                  <li><a href="#">Sidebar</a></li>
+                  <li><a href="#">Filter Default</a></li>
+                  <li><a href="#">Filter Drawer</a></li>
+                  <li><a href="#">Filter Dropdown</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+        <li>
+          <a href="" class="desktop-item">Page <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showdrop2" />
+          <label for="showdrop2" class="mobile-item">Page <span><i class="fas fa-chevron-down"></i></span></label>
+          <ul class="drop-menu2">
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </li>
+        <!-- icons -->
+        <li class="icons">
+          <span>
+            <img src="{{url_for('static', filename = 'assets/shoppingBag.svg')}}" alt="" />
+            <small class="count d-flex">0</small>
+          </span>
+          <span><img src="static/assets/search.svg" alt="" /></span>
+        </li>
+      </ul>
+      <label for="" class="btn open-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+
+  <!-- Product Details -->
+  <section class="section product-detail">
+    <div class="details container">
+      {% for produk in produks %}
+      <form>
+      <div class="left">
+        <div class="main">
+          <img src="static/assets/images/{{produk.6}}/{{produk.7}}" alt="" /> <!-- pict utama barang -->
+        </div>
+        <!-- gambar kecil kalau foto barang lebih dari 1
+        
+        <div class="thumbnails">
+          <div class="thumbnail">
+            <img src="static/images/product1.jpg" alt="" />
+          </div>
+          <div class="thumbnail">
+            <img src="./images/product3.jpg" alt="" />
+          </div>
+          <div class="thumbnail">
+            <img src="./images/product4.jpg" alt="" />
+          </div>
+          <div class="thumbnail">
+            <img src="./images/product5.jpg" alt=""q />
+          </div>
+        </div>
+        -->
+      </div>
+    </form>
+      <div class="right">
+        <span>Kategori/{{produk.6}}</span> <!--path kategori item -->
+        <h1>{{produk.1}}</h1>
+        <div class="price">Rp.{{produk.2}}</div>
+        <form action="/cart" method="post">
+          <div>
+            <select>
+              <option value="Choose Color" selected disabled> <!-- kalau baju pake ini -->
+                Choose Color
+              </option>
+              <option value="1">Red</option>
+              <option value="2">Blue</option>
+              <option value="3">Black</option>
+              <option value="4">Yellow</option>
+            </select>
+            <span><i class="fas fa-chevron-down"></i></span>
+          </div>
+        </form>
+
+        <form action="" class="form" method="POST">
+          <div>
+            <input type="hidden" name = "id_barang" value = "{{produk.0}}">
+          </div>
+          <div>
+            <input type="text" name="quantity" placeholder = "1" min="1" max="{{produk.5}}" />
+          </div>
+          <button><a type = "submit" href="/cart?cart={{produk.0}}" class="addCart">Add To Cart</a></button>
+        </form>
+        <h3>Product Detail</h3> 
+        <p>
+          {{produk.3}}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  
+
+  <!-- Footer -->
+  <footer id="footer" class="section footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-center">
+          <h3>EXTRAS</h3>
+          <a href="#">Brands</a>
+          <a href="#">Gift Certificates</a>
+          <a href="#">Affiliate</a>
+          <a href="#">Specials</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>INFORMATION</h3>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>MY ACCOUNT</h3>
+          <a href="#">My Account</a>
+          <a href="#">Order History</a>
+          <a href="#">Wish List</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Custom Scripts -->
+  <script src="./js/products.js"></script>
+  <script src="./js/slider.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

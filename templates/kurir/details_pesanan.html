@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Order Details - BidyExpress</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">BidyExpress</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('kurir')}}">Home</a></li>
+                       <!-- <li class="nav-item"><a class="nav-link" href="#!">All Products</a></li> -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                               <!-- <li><a class="dropdown-item" href="#!">Register/Login</a></li>
+                                <li><hr class="dropdown-divider" /></li>-->
+                                <li><a class="dropdown-item" href="#!">Delivery Status</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <div class=""><a class="btn btn-outline-dark mt-auto" href="static/css/styles.css">
+                            <i class="bi-person-fill me-1"></i>
+                        </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Section-->
+        <section class="py-5">
+            {% for row_pengiriman in data_pengiriman %}
+            {% for row_transaksi in data_transaksi %}
+            {% for row_barang in data_barang %}
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder">Order details</h2>
+                <br>
+                <div class="text-left card h-100">
+                    <img src="/static/assets/images/{{row_barang[6]}}/{{row_barang[7]}}" alt="..." width = "150px" />
+                    <h5 class="fw-bolder">Item Name: {{row_transaksi[2]}}</h5>
+                    <h6 class=""><b>Invoice Number:</b> {{row_transaksi[0]}}</h6>
+                    <h6 class=""><b>Receiver Name:</b> {{row_transaksi[4]}}</h6>
+                    <h6 class=""><b>Full Address:</b> {{row_pengiriman[3]}}</h6>
+                    <h6 class=""><b>Postal Code:</b> {{row_pengiriman[5]}}</h6>
+                    <h6 class=""><b>Total Price:</b> {{row_transaksi[3]}},-</h6>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+        </section>
+        <br><br><br><br><br><br><br><br>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{url_for('kurir')}}">Back to home</a></div>
+        </div>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark fixed-bottom">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; BidyShop 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
+

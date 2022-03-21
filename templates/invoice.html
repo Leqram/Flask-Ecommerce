@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ client_key }}"></script>
+    <meta charset="utf-8" />
+    <title>Invoice - BidyStore</title>
+
+    <style>
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+        color: #555;
+      }
+
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+      }
+
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
+
+      .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+      }
+
+      .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+
+      .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+      }
+
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+
+      .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      /** RTL **/
+      .invoice-box.rtl {
+        direction: rtl;
+        font-family: Tahoma, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      }
+
+      .invoice-box.rtl table {
+        text-align: right;
+      }
+
+      .invoice-box.rtl table tr td:nth-child(2) {
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="invoice-box">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td class="title">
+                  <h4>BidyStore</h4>
+                </td>
+                <td>
+                  Invoice :{{order_id}}<br />
+                  Expired pada : {{expired}}<br />
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="information">
+          <td colspan="2">
+            <table>
+              {% for data_pemesanan in data %}
+              <tr>
+                <td>
+                  {{data_pemesanan[4]}}<br />
+                  Kota {{data_pemesanan[5]}}<br />
+                </td>
+
+                <td>Nama penerima:{{data_pemesanan[3]}}<br /></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="heading">
+          <td>Biaya Ongkos Kirim</td>
+          <td></td>
+        </tr>
+
+        <tr class="details">
+          <td>Ongkos Kirim</td>
+
+          <td>{{sum}}</td>
+        </tr>
+
+        <tr class="heading">
+          <td>Item</td>
+
+          <td>Price</td>
+        </tr>
+
+        <tr class="item">
+          <td>{{data_pemesanan[1]}}</td>
+          {% endfor %}
+
+          <td>{{harga}}</td>
+        </tr>
+        <tr class="total">
+          <td></td>
+
+          <td>Total:{{total}}</td>
+        </tr>
+      </table>
+
+      <div class='cart'>
+        {% for key, value in token.items() %}
+        <input type='hidden' id='snap_token' value="{{ value }}"/>
+        {% endfor %}
+        <div class='popup'>
+          <div class='row checkout'>
+            <span><a href='#'></a></span>
+            <button class='checkout-button'>Checkout</button>
+          </div>
+      </div>
+    </div>
+
+    <script>
+      var token = document.querySelectorAll("#snap_token")[0].value;
+      console.log(token);
+
+      var checkoutBtn = document.querySelectorAll(".checkout")[0];
+      checkoutBtn.onclick = function () {
+        console.log("opening snap popup:");
+
+        // Open Snap popup with defined callbacks.
+        snap.pay(token, {
+          onSuccess: function (result) {
+            console.log("SUCCESS", result);
+            alert("Payment accepted \r\n" + JSON.stringify(result));
+          },
+          onPending: function (result) {
+            console.log("Payment pending", result);
+            alert("Payment pending \r\n" + JSON.stringify(result));
+            window.location.href = "/status_pengiriman"
+          },
+          onError: function () {
+            console.log("Payment error");
+          },
+        });
+        // For more advanced use, refer to: https://snap-docs.midtrans.com/#snap-js
+      };
+    </script>
+  </body>
+</html>

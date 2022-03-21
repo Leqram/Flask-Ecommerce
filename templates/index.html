@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- halaman ini berdasarkan tutorial yang ada di ytb & github-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{url_for('static', filename = 'assets/images/favicon.ico')}}" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <!-- Glidejs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+
+  <!-- Custom StyleSheet -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <title>BidyStore</title>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="wrapper container">
+      <div class="logo"><a href="/">BidyShop</a></div>
+      <ul class="nav-list">
+        <div class="top">
+          <label for="" class="btn close-btn"><i class="fas fa-times"></i></label>
+        </div>
+        <li>
+          <a href="" class="desktop-item">Shop <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showMega" />
+          <label for="showMega" class="mobile-item">Shop <span><i class="fas fa-chevron-down"></i></span></label>
+          <div class="mega-box">
+            <div class="content">
+              <div class="row">
+                <img src="{{url_for('static', filename = 'assets/images/woman.jpg')}}" alt="" />
+              </div>
+              <div class="row">
+                <header>Categories</header>
+                <ul class="mega-links">
+                  <li><a href="">T-shirt</a></li>
+                  <li><a href="">Kemeja</a></li>
+                  <li><a href="">Peralatan Rumah Tangga</a></li>
+                  <li><a href="">Hobbies</a></li>
+                </ul>
+              </div>
+              <div class="row">
+                <header>Filter Layout</header>
+                <ul class="mega-links">
+                  <li><a href="#">Sidebar</a></li>
+                  <li><a href="#">Filter Default</a></li>
+                  <li><a href="#">Filter Drawer</a></li>
+                  <li><a href="#">Filter Dropdown</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          {% if "username" not in session %}
+          <a href="" class="desktop-item">Login/Register <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showdrop1" />
+          <label for="showdrop1" class="mobile-item">Vendors <span><i class="fas fa-chevron-down"></i></span></label>
+
+            <ul class="drop-menu1">
+              <li><a href="{{url_for('login')}}">Login</a></li>
+              <li><a href="{{url_for('register')}}">Register</a></li>
+            </ul>
+          {% endif %}
+          
+          {% if "username" in session %}
+          <li><a href="{{url_for('logout')}}">Logout</a></li>
+          <li><a href="products.html">Products</a></li>
+          {% endif %}
+          
+        </li>
+        
+        <li>
+          <a href="" class="desktop-item">Menu <span><i class="fas fa-chevron-down"></i></span></a>
+          <input type="checkbox" id="showdrop2" />
+          <label for="showdrop2" class="mobile-item">Page <span><i class="fas fa-chevron-down"></i></span></label>
+          <ul class="drop-menu2">
+            {% if "username" in session %}
+            <li><a href="/status_pengiriman">Delivery Status</a></li>
+            {% endif %}
+            <li><a href="">About</a></li>
+          </ul>
+        </li>
+        <!-- icons -->
+        <li class="icons">
+          <span>
+            <img src="{{url_for('static', filename = 'assets/shoppingBag.svg')}}" alt="" />
+            <small class="count d-flex">0</small>
+          </span>
+          <span>
+            <img src="{{url_for('static', filename = 'assets/search.svg')}}" alt="" />
+          </span>
+          {% if "username" in session %}
+        <span>
+           <a href = "{{url_for('account')}}"><img src="{{url_for('static', filename = 'assets/images/profiles/profile.png')}}" width = "30px" height="30px" alt="" /></a>
+          </span>
+          {% endif %}
+        </li>
+      </ul>
+      <label for="" class="btn open-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+
+  
+
+  <!-- posisi Atas buat milih kategori -->
+
+  <section class="section promotion">
+    <div class="title">
+      <h2>Belanja Gan?, disini aja.</h2>
+      <span>Jaminan Harga murah, kualitas super, Ori. nggak akan mengecewakan deh :)</span>
+    </div>
+
+    <div class="promotion-layout container">
+      <div class="promotion-item">
+        <img src="{{url_for('static', filename = 'assets/images/promo1.jpg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>T-SHIRTS</h3>
+          <a href="{{url_for('login')}}">BELI SEKARANG</a>
+        </div>
+      </div>
+
+      <div class="promotion-item">
+        <img src="{{url_for('static', filename = 'assets/images/celana nevada.jpeg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>CELANA</h3>
+          <a href="{{url_for('login')}}">BELI SEKARANG</a>
+        </div>
+      </div>
+
+      <div class="promotion-item">
+        <img src="{{url_for('static', filename = 'assets/images/Kemeja/kemeja.jpeg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>KEMEJA</h3>
+          <a href="{{url_for('login')}}">BELI SEKARANG</a>
+        </div>
+      </div>
+
+      <div class="promotion-item">
+        <img src="{{url_for('static', filename = 'assets/images/perabotan.jpg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>PERABOTAN</h3>
+          <a href="{{url_for('login')}}">BELI SEKARANG</a>
+        </div>
+      </div>
+
+      <div class="promotion-item">
+        <img src="{{url_for('static',filename = 'assets/images/mainan.jpg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>MAINAN</h3>
+          <a href="">BELI SEKARANG</a>
+        </div>
+      </div>
+
+      <div class="promotion-item">
+        <img src="{{url_for('static', filename = 'assets/images/hobi.jpg')}}" alt="" />
+        <div class="promotion-content">
+          <h3>HOBI</h3>
+          <a href="">BELI SEKARANG</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products baru ditambahkan masuk kesini-->
+  <section class="section products">
+    <div class="title">
+      <h2>Produk Terbaru</h2>
+      <span>Produk terbaru dijamin Ori.</span>
+    </div>
+
+  <div class="product-layout">
+    <div class="product">
+      <a href="">T-Shirt</a>
+      {% for produk in tshirt %}
+      <div class="img-container">     
+        <img src="static/assets/images/Tshirt/{{produk.7}}" alt=""/>
+        <div class="addCart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+
+        <ul class="side-icons">
+          <span><i class="fas fa-search"></i></span>
+          <span><i class="far fa-heart"></i></span>
+          <span><i class="fas fa-sliders-h"></i></span>
+        </ul>
+      </div>
+      <div class="bottom">
+        <a href="/product_details?view={{produk.0}}">{{produk[1]}}</a>
+        <div class="price">
+          <span>Rp. {{produk[2]}}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="product">
+      <a href="">Tas</a>
+      {% for produk in Tas %}
+      <div class="img-container">
+        <img src="static/assets/images/Tas/{{produk.7}}" alt="" />
+        <div class="addCart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+
+        <ul class="side-icons">
+          <span><i class="fas fa-search"></i></span>
+          <span><i class="far fa-heart"></i></span>
+          <span><i class="fas fa-sliders-h"></i></span>
+        </ul>
+      </div>
+      <div class="bottom">
+        <a href="/product_details?view={{produk.0}}">{{produk.1}}</a>
+        <div class="price">
+          <span>Rp. {{produk.2}}</span>
+        </div>
+      </div>
+      {% endfor %}    
+    </div>
+
+    <div class="product">
+      <a href="">Jam Tangan</a>
+      {% for produk in Watch %}
+      <div class="img-container">
+        <img src="static/assets/images/Watch/{{produk.7}}" alt="" />
+        <div class="addCart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+
+        <ul class="side-icons">
+          <span><i class="fas fa-search"></i></span>
+          <span><i class="far fa-heart"></i></span>
+          <span><i class="fas fa-sliders-h"></i></span>
+        </ul>
+      </div>
+      <div class="bottom">
+        <a href="/product_details?view={{produk.0}}">{{produk.1}}</a>
+        <div class="price">
+          <span>Rp. {{produk.2}}</span>
+        </div>
+      </div>
+      {% endfor %}    
+    </div>
+  </div>
+  </section>
+  
+  <!-- EVENT DI STORE (KALAU ADA) -->
+  <section class="section advert">
+    <div class="advert-layout container">
+      <div class="item ">
+        <img src="{{url_for('static', filename = 'assets/images/promo7.jpg')}}" alt="">
+        <div class="content left">
+          <span>Exclusive Sales</span>
+          <h3>Spring Collections</h3>
+          <a href="">View Collection</a>
+        </div>
+      </div>
+      <div class="item">
+        <img src="{{url_for('static', filename = 'assets/images/promo8.jpg')}}" alt="">
+        <div class="content  right">
+          <span>New Trending</span>
+          <h3>Designer Bags</h3>
+          <a href="">Shop Now </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  
+
+  <!-- Footer -->
+  <footer id="footer" class="section footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-center">
+          <h3>EXTRAS</h3>
+          <a href="#">Brands</a>
+          <a href="#">Gift Certificates</a>
+          <a href="#">Affiliate</a>
+          <a href="#">Specials</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>INFORMATION</h3>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>MY ACCOUNT</h3>
+          <a href="#">My Account</a>
+          <a href="#">Order History</a>
+          <a href="#">Wish List</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Glidejs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+
+  <!-- JS -->
+  <script src="./js/products.js"></script>
+  <script src="./js/slider.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
+
